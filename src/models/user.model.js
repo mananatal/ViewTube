@@ -60,7 +60,7 @@ userSchema.methods.isPasswordCorrect=async function(password){
 
 userSchema.methods.generateAccessToken=function(){
    const payLoad={
-     id:this._id,
+     _id:this._id,
      username:this.username,
      email:this.email,
      fullName:this.fullName
@@ -71,7 +71,7 @@ userSchema.methods.generateAccessToken=function(){
 
 userSchema.methods.generateRefreshToken=function(){
     const payLoad={
-      id:this._id,      
+      _id:this._id,      
     }
  
     return jwt.sign(payLoad,process.env.REFRESH_TOKEN_SECRET,process.env.REFRESH_TOKEN_EXPIRE_TIME);
