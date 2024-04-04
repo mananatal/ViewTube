@@ -50,7 +50,7 @@ userSchema.pre("save",async function(next){
 
     if(!this.isModified("password")) return next();
 
-    await bcrypt.hash(this.password,10);
+    this.password=await bcrypt.hash(this.password,10);
     next();
 });
 
@@ -65,16 +65,16 @@ userSchema.methods.generateAccessToken=function(){
      email:this.email,
      fullName:this.fullName
    }
-
-   return jwt.sign(payLoad,process.env.ACCESS_TOKEN_SECRET,process.env.ACCESS_TOKEN_EXPIRE_TIME);
+   
+   return jwt.sign(payLoad,process.env.ACCESS_TOKEN_SECRET,{expiresIn:process.env.ACCESS_TOKEN_EXPIRE_TIME});
 }
 
 userSchema.methods.generateRefreshToken=function(){
     const payLoad={
       _id:this._id,      
     }
- 
-    return jwt.sign(payLoad,process.env.REFRESH_TOKEN_SECRET,process.env.REFRESH_TOKEN_EXPIRE_TIME);
+    console.log("Printing Payload of access token: ",payLoad)
+    return jwt.sign(payLoad,process.env.REFRESH_TOKEN_SECRET,{expiresIn:process.env.REFRESH_TOKEN_EXPIRE_TIME});
  }
 
 
