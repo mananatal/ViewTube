@@ -188,7 +188,74 @@ const refreshAccessToken=asyncHandler(async (req,res)=>{
     }catch(error){
         throw new ApiError(401, error?.message || "Invalid refresh token")   
     }
+});
+
+const changeCurrentPassword=asyncHandler(async (req,res)=>{
+    const {oldPassword,newPassword}=req.body;
+
+    if(!oldPassword || !newPassword){
+        throw new ApiError(400,"Some fields are missing");
+    }
+
+    const user= await User.findById(req.user?._id);
+
+    const isPasswordCorrect=await user.isPasswordCorrect(oldPassword);
+
+    if(!isPasswordCorrect){
+        throw new ApiError(401,"Old Password is incorrect");
+    }
+
+    user.password=newPassword;
+    await user.save({validateBeforeSave:false});
+
+    return res.status(200)
+           .json(
+                new ApiResponse(200,{},"Password updated successfully")
+           );
+
+});
+
+const getUserDetails=asyncHandler(async (req,res)=>{
+    if(!req.user){
+        throw new ApiError(401,"Unauthorized Access");
+    }
+    return res.status(200).json(new ApiResponse(200,req.user,"User details fetched successfully"));
+});
+
+const updataAccountDetails=asyncHandler(async (req,res)=>{
+    
+    if(!req.user){
+        throw new ApiError(401,"Unauthorized access");
+    }
+    
+    const {fullName,email}=req.body;
+
+    if([fullName,email].some((field)=>field.value.trim==="")){
+        throw new ApiError(400,"Some fields are missing, please enter all fields carefully");
+    }
+
+    const updatedUser=await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set:{
+                email,
+                fullName
+            }
+        },
+        {new:true}
+    );
+
+    return res.status(200).json(
+        new ApiResponse(200,{user:updatedUser},"User data updated successfully")
+    );
+    
+});
+
+const updateUserAvatar=asyncHandler(async (req,res)=>{
+    
 })
+
+
 
 
 
@@ -197,6 +264,9 @@ export {
     loginUser,
     registerUser,
     logoutUser,
-    refreshAccessToken
+    refreshAccessToken,
+    changeCurrentPassword,
+    getUserDetails,
+    updataAccountDetails,
     
 }
