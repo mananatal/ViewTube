@@ -252,7 +252,67 @@ const updataAccountDetails=asyncHandler(async (req,res)=>{
 });
 
 const updateUserAvatar=asyncHandler(async (req,res)=>{
+    if(!req.user){
+        throw new ApiError(401,"Unauthorized access");
+    }
+
+    const avatar=req.file?.path;
+    if(!avatar){
+        throw new ApiError(400,"avatar is missing");
+    }
+
+    //uploading avatar to cloudinary
+    const uploadedAvatar=await uploadToCloudinary(avatar);
+
+    //updating user avatar with new secure url
+    const updatedUser=await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set:{
+                avatar:uploadedAvatar.secure_url,
+            }
+        },
+        {new:true}
+    );
     
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{updatedUser},"User Avatar updated successfully")
+    );
+
+})
+
+const updateUserCoverImage=asyncHandler(async (req,res)=>{
+    if(!req.user){
+        throw new ApiError(401,"Unauthorized access");
+    }
+
+    const coverImage=req.file?.path;
+    if(!coverImage){
+        throw new ApiError(400,"coverImage is missing");
+    }
+
+    //uploading avatar to cloudinary
+    const uploadedCoverImage=await uploadToCloudinary(coverImage);
+
+    //updating user avatar with new secure url
+    const updatedUser=await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set:{
+                coverImage:uploadedCoverImage.secure_url,
+            }
+        },
+        {new:true}
+    );
+    
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{updatedUser},"User Cover image updated successfully")
+    );
+
 })
 
 
@@ -268,5 +328,7 @@ export {
     changeCurrentPassword,
     getUserDetails,
     updataAccountDetails,
+    updateUserAvatar,
+    updateUserCoverImage,
     
 }
