@@ -17,9 +17,13 @@ app.use(express.urlencoded({extended: true, limit: "20kb"}));
 
 //importing router
 import userRouter from "./routes/user.route.js";
+import tweetRouter from "./routes/tweet.route.js";
+import likeRouter from "./routes/like.route.js";
 
 //declaring routes
-app.use("/api/v1/auth",userRouter)
+app.use("/api/v1/auth",userRouter);
+app.use("/api/v1/tweets",tweetRouter);
+app.use("/api/v1/likes", likeRouter);
 
 
 export {app}
