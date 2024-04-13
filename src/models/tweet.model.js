@@ -14,4 +14,4 @@ const tweetSchema=new mongoose.Schema({
 
 },{timestamps:true});
 
-module.exports=mongoose.model("Tweet",tweetSchema);
+export const Tweet=mongoose.model("Tweet",tweetSchema);
