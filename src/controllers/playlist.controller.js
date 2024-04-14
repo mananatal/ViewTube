@@ -6,40 +6,161 @@ import {asyncHandler} from "../utils/asyncHandler.js"
 
 
 const createPlaylist = asyncHandler(async (req, res) => {
-    const {name, description} = req.body
+    const {name, description} = req.body;
 
-    //TODO: create playlist
+    if(!name || !description){
+        throw new ApiError(400,"Some fields are missing");
+    }
+
+    //creating playlist
+    const playlist=await Playlist.create({
+        name,
+        description,
+        owner:req.user?._id
+    });
+
+    if(!playlist){
+        throw new ApiError("500","Error while Creating playlist");
+    }
+
+    return res.status(200).json(new ApiResponse(200,playlist,"Playlist created successfully"));
+    
 })
 
 const getUserPlaylists = asyncHandler(async (req, res) => {
-    const {userId} = req.params
-    //TODO: get user playlists
+    const {userId} = req.params;
+
+    if(!userId){
+        throw new ApiError(400,"userId is required");
+    }
+
+    const userPlaylists=await Playlist.find({owner:userId})
+                                    .populate({
+                                        path:"owner",
+                                        select:"username avatar fullName"
+                                    })
+                                    .populate("videos");
+    
+    if(!userPlaylists.length){
+        return res.status(200).json(new ApiResponse(200,{},"No playlist exists for given user"));
+    }
+
+    return res.status(200).json(new ApiResponse(200,userPlaylists,"User Playlists fetched successfully"));
+    
 })
 
 const getPlaylistById = asyncHandler(async (req, res) => {
     const {playlistId} = req.params
-    //TODO: get playlist by id
+    
+    if(!playlistId){
+        throw new ApiError(400,"Playlist id is missing");
+    }
+
+    const playlist=await Playlist.findById(playlistId)
+                                    .populate({
+                                        path:"owner",
+                                        select:"username avatar fullName"
+                                    })
+                                    .populate("videos");
+
+    if(!playlist){
+        throw new ApiError(404,"No playlist exist for given id");
+    }
+
+    return res.status(200).json(new ApiResponse(200,playlist,"Playlist fetched successfully"));
+    
 })
 
 const addVideoToPlaylist = asyncHandler(async (req, res) => {
-    const {playlistId, videoId} = req.params
+    const {playlistId, videoId} = req.params;
+
+    if(!videoId || !playlistId){
+        throw new ApiError(400,"Some fields are missing");
+    }
+
+    const updatedPlaylist=await Playlist.findByIdAndUpdate(
+        playlistId,
+        {
+            $push:{
+                videos:videoId,
+            }
+        },
+        {new:true}
+    );
+
+    if(!updatedPlaylist){
+        throw new ApiError(500,"Error while adding video to playlist");
+    }
+
+    return res.status(200).json(new ApiResponse(200,updatedPlaylist,"Video successfully added to playlist"));
 })
 
 const removeVideoFromPlaylist = asyncHandler(async (req, res) => {
     const {playlistId, videoId} = req.params
-    // TODO: remove video from playlist
+    
+    if(!videoId || !playlistId){
+        throw new ApiError(400,"Some fields are missing");
+    }
+
+    const updatedPlaylist=await Playlist.findByIdAndUpdate(
+        playlistId,
+        {
+            $pull:{
+                videos:videoId,
+            }
+        },
+        {new:true}
+    );
+
+    if(!updatedPlaylist){
+        throw new ApiError(500,"Error while Removing video from playlist");
+    }
+
+    return res.status(200).json(new ApiResponse(200,updatedPlaylist,"Video successfully removed from playlist"));
 
 })
 
 const deletePlaylist = asyncHandler(async (req, res) => {
     const {playlistId} = req.params
-    // TODO: delete playlist
+    
+    if(!playlistId){
+        throw new ApiError(400,"Playlist id is missing");
+    }
+
+    const deletedPlaylist= await Playlist.findByIdAndDelete(playlistId);
+
+    if(!deletedPlaylist){
+        throw new ApiError(500,"Error while deleting playlist");
+    }
+
+    return res.status(200).json(new ApiResponse(200,deletedPlaylist,"Playlist deleted successfully"));
 })
 
 const updatePlaylist = asyncHandler(async (req, res) => {
     const {playlistId} = req.params
     const {name, description} = req.body
-    //TODO: update playlist
+
+    if(!name || !description || !playlistId){
+        throw new ApiError(400,"Some fields are missing");
+    }
+
+    const updatedPlaylist=await Playlist.findByIdAndUpdate(
+        playlistId,
+        {
+            $set:{
+                name,
+                description
+            }
+        },
+        {new:true}
+    );
+
+    if(!updatedPlaylist){
+        throw new ApiError(500,"Error while Removing video from playlist");
+    }
+    
+    return res.status(200).json(new ApiResponse(200,updatedPlaylist,"successfully updated the playlist"));
+
 })
 
 export {
