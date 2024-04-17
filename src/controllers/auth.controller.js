@@ -4,7 +4,7 @@ import  { ApiError } from "../utils/ApiError.js";
 import  { ApiResponse } from "../utils/ApiResponse.js"
 import {uploadToCloudinary} from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
-import mongoose ,{Schema} from "mongoose";
+import mongoose  from "mongoose";
 
 
 const options={
@@ -27,13 +27,14 @@ const generateAccessAndRefreshToken=async (userId)=>{
         return {accessToken,refreshToken};       
 
     }
-    catch(error){        
+    catch(error){         
         throw new ApiError(500,"Error while generating access and refresh token");
     }
 }
 
 
 const registerUser=asyncHandler(async (req,res)=>{
+
     //importing file from req body
     const {password,fullName,email,username}=req.body;
     //importing image file 
@@ -47,7 +48,7 @@ const registerUser=asyncHandler(async (req,res)=>{
     if([password,fullName,email,username,avatarLocalPath].some((field)=>field.trim==="")){
         throw new ApiError(400,"All fields are required");
     }
-
+                                                                                                                                                
     //checking if user already registers
     const existedUser=await User.findOne({$or:[{email},{username}]});
 

@@ -12,9 +12,8 @@ router.post("/logout",verifyJWT,logoutUser);
 router.post("/refresh-token",refreshAccessToken);
 router.post("/change-password",verifyJWT,changeCurrentPassword);
 router.patch('/update-profile',verifyJWT,updataAccountDetails);
-router.patch("/update-avatar",verifyJWT,updateUserAvatar);
-router.patch("/update-cover-image",verifyJWT,updateUserCoverImage);
+router.patch("/update-avatar",verifyJWT,upload.single("avatar"),updateUserAvatar);
+router.patch("/update-cover-image",verifyJWT,upload.single("coverImage"),updateUserCoverImage);
 router.get("/current-user",verifyJWT,getUserDetails);
-
 
 export default router;
