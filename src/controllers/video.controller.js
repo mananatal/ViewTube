@@ -133,8 +133,6 @@ const publishAVideo = asyncHandler(async (req, res) => {
     //uploading video file to cloudinary
     const updatedVideoFile=await uploadToCloudinary(videoFile);
 
-    console.log(updatedVideoFile);
-
     const publishedVideo=await Video.create({
         title,
         description,
@@ -154,7 +152,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
 const getVideoById = asyncHandler(async (req, res) => {
     const { videoId } = req.params
     
-    if(!videoId){
+    if(!videoId.trim()){
         throw new ApiError(400,"VideoId is missing");
     }
 
@@ -199,7 +197,7 @@ const updateVideo = asyncHandler(async (req, res) => {
 
     const video=await Video.findById(videoId);
 
-    if(video?.owner!=req.user?._id){
+    if(!video?.owner.equals(req.user?._id)){
         throw new ApiError(401,"Unauthorized Access");
     }
 
@@ -283,12 +281,8 @@ const deleteVideo = asyncHandler(async (req, res) => {
 const togglePublishStatus = asyncHandler(async (req, res) => {
     const { videoId } = req.params;
 
-    if(!videoId){
-        throw new ApiError(400,"VideoId is missing");
-    }
-
-    if(!isValidObjectId(videoId)){
-        throw new ApiError(401,"Invalid object id")
+    if(!videoId || !isValidObjectId(videoId)){
+        throw new ApiError(400,!videoId?"VideoId is missing":"Invalid object id");
     }
 
     const video=await Video.findById(videoId);

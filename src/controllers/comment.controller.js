@@ -73,7 +73,7 @@ const addComment = asyncHandler(async (req, res) => {
     const {videoId}=req.params;
     const {content}=req.body;
 
-    if(!content || !videoId){
+    if(!content.trim() || !videoId){
         throw new ApiError(400,"Some fields are missing");
     }
 

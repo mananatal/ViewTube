@@ -8,7 +8,7 @@ import { Like } from "../models/like.model.js"
 const createTweet = asyncHandler(async (req, res) => {   
     const {content}=req.body;
 
-    if(!content){
+    if(!content.trim()){
         throw new ApiError(400,"Content is missing");
     }
 
@@ -68,18 +68,18 @@ const updateTweet = asyncHandler(async (req, res) => {
 
 const deleteTweet = asyncHandler(async (req, res) => {
     const {tweetId}=req.params;
-
-    if(!tweetId){
-        throw new ApiError(401,'tweetId not found');
+    console.log("INDISE")
+    if(!tweetId || !isValidObjectId(tweetId)){
+        throw new ApiError(401,!tweetId?'tweetId not found':'invalid tweet id');
     }
 
     //deleting likes on tweet which is to be deleted
     await Like.deleteMany({tweet:tweetId});
 
     //deleting tweet
-    await Tweet.deleteOne({tweetId});
+    await Tweet.deleteOne({_id:tweetId});
 
-    return res.status(200).json(200,{},"Tweet deleted succesfully");
+    return res.status(200).json(new ApiResponse(200,{},"Tweet deleted succesfully"));
 
 })
 
