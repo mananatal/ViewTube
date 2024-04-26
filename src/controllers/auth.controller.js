@@ -18,7 +18,7 @@ const generateAccessAndRefreshToken=async (userId)=>{
     try{
         const user =await User.findById(userId);
         const refreshToken=user.generateRefreshToken();
-        console.log("PRINTING USER: ",refreshToken)
+       
         const accessToken=user.generateAccessToken();
         
         user.refreshToken=refreshToken;
@@ -104,8 +104,8 @@ const loginUser=asyncHandler(async (req,res)=>{
     }
 
     //If user exists then comparing password with db password
-    const isPasswordCorrect= existedUser.isPasswordCorrect(password);
-
+    const isPasswordCorrect=await  existedUser.isPasswordCorrect(password);
+  
     if(!isPasswordCorrect){
         throw new ApiError(400,"Please Enter correct password");
     }
@@ -232,7 +232,7 @@ const updataAccountDetails=asyncHandler(async (req,res)=>{
     
     const {fullName,email}=req.body;
 
-    if([fullName,email].some((field)=>field.value.trim==="")){
+    if([fullName,email].some((field)=>field.trim()==="")){
         throw new ApiError(400,"Some fields are missing, please enter all fields carefully");
     }
 
@@ -355,9 +355,11 @@ const getUserProfileDetails=asyncHandler(async (req,res)=>{
                     $size:"$subscribedTo"
                 },
                 isSubscribed:{
-                    $if:{$in:[req.user?._id,"$subscribers.subscriber"]},
-                    then:true,
-                    else:false
+                    $cond:{
+                        if:{$in:[req.user?._id,"$subscribers.subscriber"]},
+                        then:true,
+                        else:false
+                    }                    
                 }
             }
         },
@@ -394,11 +396,13 @@ const getWatchHistory=asyncHandler(async (req,res)=>{
 
     if(!req.user?._id){
         throw new ApiError(403,"Unauthorized access");
-    }
-
+    }    
+  
     const user=await User.aggregate([
         {
-            $match:new mongoose.Types.ObjectId(req.user?._id)
+            $match:{
+                _id:new mongoose.Types.ObjectId(req.user?._id)
+            }
         },
         {
             $lookup:{
@@ -418,7 +422,7 @@ const getWatchHistory=asyncHandler(async (req,res)=>{
                                     $project:{
                                         fullName:1,
                                         avatar:1,
-                                        username
+                                        username:1
                                     }
                                 }
                             ]

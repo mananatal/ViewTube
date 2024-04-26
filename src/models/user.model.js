@@ -73,7 +73,6 @@ userSchema.methods.generateRefreshToken=function(){
     const payLoad={
       _id:this._id,      
     }
-    console.log("Printing Payload of access token: ",payLoad)
     return jwt.sign(payLoad,process.env.REFRESH_TOKEN_SECRET,{expiresIn:process.env.REFRESH_TOKEN_EXPIRE_TIME});
  }
 

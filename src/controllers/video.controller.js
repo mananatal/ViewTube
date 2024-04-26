@@ -4,7 +4,7 @@ import {User} from "../models/user.model.js"
 import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
-import {deleteFromCloudinary, uploadOnCloudinary} from "../utils/cloudinary.js"
+import {deleteFromCloudinary, uploadToCloudinary} from "../utils/cloudinary.js"
 import { Like } from "../models/like.model.js"
 import { Comment } from "../models/comment.model.js"
 import {Playlist} from "../models/playlist.model.js"
@@ -129,9 +129,9 @@ const publishAVideo = asyncHandler(async (req, res) => {
     }
 
     //uploading thumbnail to cloudinary
-    const updatedThumbnail=await uploadOnCloudinary(thumbnail);
+    const updatedThumbnail=await uploadToCloudinary(thumbnail);
     //uploading video file to cloudinary
-    const updatedVideoFile=await uploadOnCloudinary(videoFile);
+    const updatedVideoFile=await uploadToCloudinary(videoFile);
 
     console.log(updatedVideoFile);
 
@@ -204,12 +204,12 @@ const updateVideo = asyncHandler(async (req, res) => {
     }
 
     if(videoFileLocalPath){
-        const updatedVideo=await uploadOnCloudinary(videoFileLocalPath);
+        const updatedVideo=await uploadToCloudinary(videoFileLocalPath);
         video.videoFile=updatedVideo.secure_url;
         video.duration=updatedVideo.duration;
     }
     if(thumbnailLocalPath){
-        const updatedThumbnail=await uploadOnCloudinary(thumbnailLocalPath);
+        const updatedThumbnail=await uploadToCloudinary(thumbnailLocalPath);
         video.thumbnail=updatedThumbnail.secure_url;
     }
 
