@@ -12,20 +12,25 @@ const toggleSubscription = asyncHandler(async (req, res) => {
     if(!channelId || !isValidObjectId(channelId)){
         throw new ApiError(400,!channelId?"Channel id is Missing":"Invalid channel Id");
     }
-
+    
     const toggle=await Subscription.findOne({channel:channelId,subscriber:req.user?._id});
 
     if(toggle){
         await Subscription.deleteOne({channel:channelId,subscriber:req.user?._id});
         return res.status(200).json(new ApiResponse(200,{},"Channel Unsubscribed Successfully"));
     }
-
-    toggle.subscriber=req.user?._id;
-    toggle.channel=channelId;
-
-    await toggle.save();
     
-    return res.status(200).json(new ApiResponse(200,toggle,"Channel subscribed Successfully"));
+    const createdSubscription=await Subscription.create({
+        subscriber:req.user?._id,
+        channel:channelId,
+    });
+    // toggle.subscriber=req.user?._id;
+    // toggle.channel=channelId;
+
+    // console.log("Printing toggle",toggle)
+    // await toggle.save();
+    
+    return res.status(200).json(new ApiResponse(200,createdSubscription,"Channel subscribed Successfully"));
 
 })
 

@@ -9,7 +9,7 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
    
     const likedvideo=await Like.findOne({video:videoId, likedBy:req.user?._id});
 
-    if(likedTweet){
+    if(likedvideo){
         //then remove the liked video document from the likes schema
         await Like.deleteOne({video:videoId, likedBy:req.user._id});
         return res.status(200).json(new ApiResponse(200,{},"video unliked successfully"));
@@ -38,7 +38,7 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
     //in !likedcomment then creating new document for like comment
     await Like.create({
         likedBy:req.user?._id,
-        comment:tweetId
+        comment:commentId
     });
 
     return res.status(200).json(new ApiResponse(200,{},"comment Liked successfully"));

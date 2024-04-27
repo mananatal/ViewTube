@@ -1,13 +1,11 @@
 import mongoose,{Schema} from "mongoose"
 import {Video} from "../models/video.model.js"
 import {Subscription} from "../models/subscription.model.js"
-import {Like} from "../models/like.model.js"
 import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
 
 const getChannelStats = asyncHandler(async (req, res) => {
-    // TODO: Get the channel stats like total video views, total subscribers, total videos, total likes etc.
     if(!req.user?._id){
         throw new ApiError(401,"Unauthorized Access");
     }
@@ -15,7 +13,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
     const SubscribersCount=await Subscription.aggregate([
         {
             $match:{
-                channel:new Schema.Types.ObjectId(req.user?._id),
+                channel:new mongoose.Types.ObjectId(req.user?._id),
             }
         },
         {
@@ -26,7 +24,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
     const VideosCount=await Video.aggregate([
         {
             $match:{
-                owner:new Schema.Types.ObjectId(req.user?._id),
+                owner:new mongoose.Types.ObjectId(req.user?._id),
             }
         },
         {
@@ -37,7 +35,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
     const likesCount=await Video.aggregate([
         {
             $match:{
-                owner:new Schema.Types.ObjectId(req.user?._id),
+                owner:new mongoose.Types.ObjectId(req.user?._id),
             }
         },
         {
@@ -60,7 +58,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
     const viewsCount=await Video.aggregate([
         {
             $match:{
-                owner:new Schema.Types.ObjectId(req.user?._id),
+                owner:new mongoose.Types.ObjectId(req.user?._id),
             }
         },
         {
