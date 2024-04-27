@@ -1,4 +1,4 @@
-# Project Name: Videotube (Backend Project)
+# Project Name: Videotube 
 
 
 ## Project Summary:
