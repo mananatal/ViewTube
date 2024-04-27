@@ -4,7 +4,7 @@ const playlistSchema=new mongoose.Schema({
     owner:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        require:true,
+        required:true,
     },
     videos:[
         {
@@ -14,12 +14,12 @@ const playlistSchema=new mongoose.Schema({
     ],
     name:{
         type:String,
-        require:true,
+        required:true,
         trim:true
     },
     description:{
         type:String,
-        require:true,
+        required:true,
         trim:true
     },
 

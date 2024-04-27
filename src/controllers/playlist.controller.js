@@ -3,6 +3,7 @@ import {Playlist} from "../models/playlist.model.js"
 import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
+import { Video } from "../models/video.model.js"
 
 
 const createPlaylist = asyncHandler(async (req, res) => {
@@ -11,6 +12,7 @@ const createPlaylist = asyncHandler(async (req, res) => {
     if(!name || !description){
         throw new ApiError(400,"Some fields are missing");
     }
+
 
     //creating playlist
     const playlist=await Playlist.create({
@@ -78,15 +80,34 @@ const addVideoToPlaylist = asyncHandler(async (req, res) => {
         throw new ApiError(400,"Some fields are missing");
     }
 
-    const updatedPlaylist=await Playlist.findByIdAndUpdate(
-        playlistId,
+    const playlist=await Playlist.findById(playlistId);
+    if(!playlist){
+        throw new ApiError(404,"Playlist not found with given id");
+    }
+    if(playlist.videos.includes(videoId)){
+        throw new ApiError(400,"Video already present in playlist");
+    }
+    
+    const video=await Video.findById(videoId);
+    if(!video){
+        throw new ApiError(404,"please enter valid video id")
+    }
+
+
+
+    // const existedVideoInPlaylist=await 
+
+    const updatedPlaylist=await Playlist.findOneAndUpdate(
+        {_id:playlistId},
         {
             $push:{
-                videos:videoId,
+                videos:video?._id,
             }
         },
-        {new:true}
+        {new:true},
     );
+
+    console.log("PRINTING UPDATED PLAYLIST: ",updatedPlaylist)
 
     if(!updatedPlaylist){
         throw new ApiError(500,"Error while adding video to playlist");

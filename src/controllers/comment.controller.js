@@ -4,11 +4,12 @@ import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
 import {Like} from "../models/like.model.js";
+import {Video} from "../models/video.model.js"
 
 const getVideoComments = asyncHandler(async (req, res) => {
   
-    const {videoId} = req.params
-    const {page = 1, limit = 10} = req.query
+    const {videoId} = req.params;
+    const {page = 1, limit = 10} = req.query;
 
     if(!videoId || !page || !limit){
         throw new ApiError(400,"Some fields are missing");
@@ -72,14 +73,14 @@ const getVideoComments = asyncHandler(async (req, res) => {
 const addComment = asyncHandler(async (req, res) => {   
     const {videoId}=req.params;
     const {content}=req.body;
-
+    
     if(!content.trim() || !videoId){
         throw new ApiError(400,"Some fields are missing");
-    }
+    }    
 
     const comment=await Comment.create({
-        video:videoId,
         content,
+        video: videoId,
         owner:req.user?._id
     });
 
@@ -88,10 +89,15 @@ const addComment = asyncHandler(async (req, res) => {
 
 const updateComment = asyncHandler(async (req, res) => {
     const {commentId}=req.params;
-    const {content}=req.body;
+    const {content}=req.body;    
 
     if(!content || !commentId){
         throw new ApiError(400,"Some fields are missing");
+    }
+
+    const comment=await Comment.findById(commentId);
+    if(!comment){
+        throw new ApiError(404,"Please Enter a valid comment id")
     }
 
     const updatedComment=await Comment.findByIdAndUpdate(
