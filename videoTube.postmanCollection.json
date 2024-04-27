@@ -1,0 +1,1478 @@
+{
+    "collection": {
+      "info": {
+        "_postman_id": "81ad568d-faad-43bf-93a8-dbaf75cf8d3f",
+        "name": "VideoTube",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "updatedAt": "2024-04-27T10:28:23.000Z",
+        "uid": "30809122-81ad568d-faad-43bf-93a8-dbaf75cf8d3f",
+        "createdAt": null,
+        "lastUpdatedBy": null
+      },
+      "item": [
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "login",
+              "id": "23f8b425-d0b4-4904-b9ad-1c9bf048d31b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"mananatal25@gmail.com\",\r\n    \"password\":\"test\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ]
+                },
+                "description": "The `POST` request to `/api/v1/auth/login` endpoint is used to authenticate and log in a user. The request should include the user's email and password in the request body.\n\n### Request Body\n\n- `email` (string, required): The email of the user.\n- `password` (string, required): The password of the user.\n    \n\n### Response\n\nThe response of this request is a JSON schema representing the structure of the response data. The schema includes the keys and data types of the response attributes, providing a clear understanding of the expected response format."
+              },
+              "response": [],
+              "uid": "30809122-23f8b425-d0b4-4904-b9ad-1c9bf048d31b"
+            },
+            {
+              "name": "registerUser",
+              "id": "0935e7f0-0c0e-4f29-b606-555c0e0c277a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "username",
+                      "value": "johndoe",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "test",
+                      "type": "text"
+                    },
+                    {
+                      "key": "email",
+                      "value": "aaa@b.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "fullName",
+                      "value": "john doe",
+                      "type": "text"
+                    },
+                    {
+                      "key": "avatar",
+                      "type": "file",
+                      "fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+                      "filesNotInWorkingDirectory": [
+                        "/C:/Users/manan/Downloads/Screenshot 2024-04-22 161554.png"
+                      ],
+                      "src": "/C:/Users/manan/Downloads/Screenshot 2024-04-22 161554.png"
+                    },
+                    {
+                      "key": "coverImage",
+                      "type": "file",
+                      "fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+                      "filesNotInWorkingDirectory": [
+                        "/C:/Users/manan/Downloads/Screenshot 2024-04-22 161554.png"
+                      ],
+                      "src": "/C:/Users/manan/Downloads/Screenshot 2024-04-22 161554.png"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{videoTubeAuth}}/register",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                },
+                "description": "\nThe `POST` request to `{{videoTubeAuth}}/register` endpoint is used to register a new user. The request should be sent with the `form-data` body type containing the following parameters:\n- `username` (text): The username of the user.\n- `password` (text): The password for the user account.\n- `email` (text): The email address of the user.\n- `fullName` (text): The full name of the user.\n- `avatar` (file): The avatar image file for the user.\n- `coverImage` (file): The cover image file for the user's profile.\n\nThe response to this request has a status code of 201 and a `Content-Type` of `application/json`. The response body contains the following fields:\n- `statusCode` (number): Indicates the status of the response.\n- `data` (object): Contains the user's information including their ID, username, email, full name, avatar, cover image, watch history, creation and update timestamps, and version.\n- `message` (string): Any additional message related to the response.\n- `success` (boolean): Indicates the success status of the request.\n\nThis endpoint is used to create a new user account and provides details of the user's information in the response.\n"
+              },
+              "response": [],
+              "uid": "30809122-0935e7f0-0c0e-4f29-b606-555c0e0c277a"
+            },
+            {
+              "name": "logout",
+              "id": "414ae8aa-aaa6-4518-969d-c25336b1c32c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeAuth}}/logout",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "logout"
+                  ]
+                },
+                "description": "The `POST /logout` endpoint is used to log out the user from the video tube application.\n\n### Response\n\nThe response for the request is in JSON format with the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"object\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"success\": {\n            \"type\": \"boolean\"\n        }\n    }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-414ae8aa-aaa6-4518-969d-c25336b1c32c"
+            },
+            {
+              "name": "refreshToken",
+              "id": "1905a3e2-9ac4-4a48-b340-7f67002245ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeAuth}}/refresh-token",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "refresh-token"
+                  ]
+                },
+                "description": "The `POST /refresh-token` endpoint is used to refresh the access token by providing a valid refresh token.\n\n### Response\n\nThe response will be in the JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"statusCode\": {\n      \"type\": \"number\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"refreshToken\": {\n          \"type\": \"string\"\n        },\n        \"accessToken\": {\n          \"type\": \"string\"\n        }\n      }\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"success\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-1905a3e2-9ac4-4a48-b340-7f67002245ca"
+            },
+            {
+              "name": "change password",
+              "id": "e7b81c66-7e1d-4037-ab82-9486dda44605",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"oldPassword\":\"manan123\",\r\n    \"newPassword\":\"test\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{videoTubeAuth}}/change-password",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "change-password"
+                  ]
+                },
+                "description": "\n    \n### Change Password\n\nThis endpoint allows the user to change their password.\n\n#### Request Body\n- `oldPassword` (string, required): The user's current password.\n- `newPassword` (string, required): The new password.\n\n#### Response\nThe response is in JSON format and follows the schema below:\n```json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"object\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"success\": {\n            \"type\": \"boolean\"\n        }\n    }\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-e7b81c66-7e1d-4037-ab82-9486dda44605"
+            },
+            {
+              "name": "update Profile",
+              "id": "18926236-2d58-4ebd-8bda-23f548045968",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"fullName\":\"M Atal\",\r\n    \"email\":\"a@b.com  \"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{videoTubeAuth}}/update-profile",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "update-profile"
+                  ]
+                },
+                "description": "\n### Update Profile\n\nThe `update-profile` endpoint is used to update the user's profile information.\n\n#### Request Body\n- The request should be a HTTP PATCH request to `{{videoTubeAuth}}/update-profile`.\n- The request body should be in raw JSON format with the following parameters:\n  - `fullName` (string, optional): The full name of the user.\n  - `email` (string, optional): The email address of the user.\n\n#### Response\nThe response will be in JSON format with the following schema:\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"statusCode\": {\n      \"type\": \"number\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"user\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"_id\": {\n              \"type\": \"string\"\n            },\n            \"username\": {\n              \"type\": \"string\"\n            },\n            \"email\": {\n              \"type\": \"string\"\n            },\n            \"fullName\": {\n              \"type\": \"string\"\n            },\n            \"avatar\": {\n              \"type\": \"string\"\n            },\n            \"coverImage\": {\n              \"type\": \"string\"\n            },\n            \"watchHistory\": {\n              \"type\": \"array\"\n            },\n            \"password\": {\n              \"type\": \"string\"\n            },\n            \"createdAt\": {\n              \"type\": \"string\"\n            },\n            \"updatedAt\": {\n              \"type\": \"string\"\n            },\n            \"__v\": {\n              \"type\": \"number\"\n            },\n            \"refreshToken\": {\n              \"type\": \"string\"\n            }\n          }\n        },\n        \"message\": {\n          \"type\": \"string\"\n        },\n        \"success\": {\n          \"type\": \"boolean\"\n        }\n      }\n    }\n  }\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-18926236-2d58-4ebd-8bda-23f548045968"
+            },
+            {
+              "name": "update avatar",
+              "id": "98049d8f-b081-4799-9a1e-7e31f903afb8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "avatar",
+                      "type": "file",
+                      "src": "/C:/Users/manan/Downloads/1517457193606.jpeg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{videoTubeAuth}}/update-avatar",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "update-avatar"
+                  ]
+                },
+                "description": "\n### Update Avatar\n\nThis endpoint allows the user to update their avatar by sending a PATCH request to the `{{videoTubeAuth}}/update-avatar` endpoint.\n\n#### Request Body\nThe request should include a form-data body with a key \"avatar\" of type file. \n\n#### Response\nThe response for this request is a JSON object conforming to the following schema:\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"string\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n```\nThis schema includes the \"status\" and \"message\" properties to indicate the status of the request.\n"
+              },
+              "response": [],
+              "uid": "30809122-98049d8f-b081-4799-9a1e-7e31f903afb8"
+            },
+            {
+              "name": "update cover image",
+              "id": "cb9697a0-129e-43ab-82a4-f5825ec35876",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "coverImage",
+                      "type": "file",
+                      "src": "/C:/Users/manan/Downloads/1517457193606.jpeg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{videoTubeAuth}}/update-cover-image",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "update-cover-image"
+                  ]
+                },
+                "description": "### Update Cover Image\n\nThis endpoint allows the user to update the cover image for their video tube account.\n\n#### Request Body\n\n- form-data\n    - coverImage (file): The cover image file to be uploaded.\n\n#### Response\n\nThe response is in JSON format and follows the schema below:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"updatedUser\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"_id\": {\n                            \"type\": \"string\"\n                        },\n                        \"username\": {\n                            \"type\": \"string\"\n                        },\n                        \"email\": {\n                            \"type\": \"string\"\n                        },\n                        \"fullName\": {\n                            \"type\": \"string\"\n                        },\n                        \"avatar\": {\n                            \"type\": \"string\"\n                        },\n                        \"coverImage\": {\n                            \"type\": \"string\"\n                        },\n                        \"watchHistory\": {\n                            \"type\": \"array\"\n                        },\n                        \"password\": {\n                            \"type\": \"string\"\n                        },\n                        \"createdAt\": {\n                            \"type\": \"string\"\n                        },\n                        \"updatedAt\": {\n                            \"type\": \"string\"\n                        },\n                        \"__v\": {\n                            \"type\": \"number\"\n                        },\n                        \"refreshToken\": {\n                            \"type\": \"string\"\n                        }\n                    }\n                },\n                \"message\": {\n                    \"type\": \"string\"\n                },\n                \"success\": {\n                    \"type\": \"boolean\"\n                }\n            }\n        }\n    }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-cb9697a0-129e-43ab-82a4-f5825ec35876"
+            },
+            {
+              "name": "get User Details",
+              "id": "fb4f7f66-e825-45d2-a7a9-6ce73b5b1383",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeAuth}}/current-user",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "current-user"
+                  ]
+                },
+                "description": "This endpoint makes an HTTP GET request to fetch the details of the current user from the video tube service. The response returned is a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"statusCode\": {\n      \"type\": \"number\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"_id\": {\n          \"type\": \"string\"\n        },\n        \"username\": {\n          \"type\": \"string\"\n        },\n        \"email\": {\n          \"type\": \"string\"\n        },\n        \"fullName\": {\n          \"type\": \"string\"\n        },\n        \"avatar\": {\n          \"type\": \"string\"\n        },\n        \"coverImage\": {\n          \"type\": \"string\"\n        },\n        \"watchHistory\": {\n          \"type\": \"array\"\n        },\n        \"createdAt\": {\n          \"type\": \"string\"\n        },\n        \"updatedAt\": {\n          \"type\": \"string\"\n        },\n        \"__v\": {\n          \"type\": \"number\"\n        }\n      }\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"success\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-fb4f7f66-e825-45d2-a7a9-6ce73b5b1383"
+            },
+            {
+              "name": "get User Profile Details",
+              "id": "d703a78e-dfe2-473e-b235-b3676cf69259",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeAuth}}/c/:username",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "c",
+                    ":username"
+                  ],
+                  "variable": [
+                    {
+                      "key": "username",
+                      "value": "mananatal"
+                    }
+                  ]
+                },
+                "description": "\nThis endpoint makes an HTTP GET request to retrieve user details for a specific username from the video tube platform. The response returns a JSON object with a status code of 200 and a content type of application/json. The response body follows the JSON schema below:\n\n```json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"_id\": {\n                    \"type\": \"string\"\n                },\n                \"username\": {\n                    \"type\": \"string\"\n                },\n                \"email\": {\n                    \"type\": \"string\"\n                },\n                \"fullName\": {\n                    \"type\": \"string\"\n                },\n                \"avatar\": {\n                    \"type\": \"string\"\n                },\n                \"coverImage\": {\n                    \"type\": \"string\"\n                },\n                \"subscribersCount\": {\n                    \"type\": \"number\"\n                },\n                \"subscribedToCount\": {\n                    \"type\": \"number\"\n                },\n                \"isSubscribed\": {\n                    \"type\": \"boolean\"\n                }\n            }\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"success\": {\n            \"type\": \"boolean\"\n        }\n    }\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-d703a78e-dfe2-473e-b235-b3676cf69259"
+            },
+            {
+              "name": "get Watch History",
+              "id": "f38a7337-17bf-4005-a7bc-47e4b1d6d15d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeAuth}}//history",
+                  "host": [
+                    "{{videoTubeAuth}}"
+                  ],
+                  "path": [
+                    "",
+                    "history"
+                  ]
+                },
+                "description": "\nThe `GET` request to `{{videoTubeAuth}}/history` endpoint retrieves the history of videos. \n\n### Response\nThe response is a JSON object with the following properties:\n\n- `statusCode` (number): The status code of the response.\n- `data` (array): An array containing the history of videos.\n- `message` (string): A message related to the response.\n- `success` (boolean): Indicates the success status of the response.\n\nExample:\n```json\n{\n  \"statusCode\": 0,\n  \"data\": [],\n  \"message\": \"\",\n  \"success\": true\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-f38a7337-17bf-4005-a7bc-47e4b1d6d15d"
+            }
+          ],
+          "id": "cf3c94b2-e3a4-4ab5-9c8f-da66389ee0e1",
+          "uid": "30809122-cf3c94b2-e3a4-4ab5-9c8f-da66389ee0e1"
+        },
+        {
+          "name": "tweets",
+          "item": [
+            {
+              "name": "create tweet",
+              "id": "bce2d41c-965d-4f72-9c27-8748f2f0293e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"content\":\"tweet 3     \"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{videoTubeTweets}}/createTweet",
+                  "host": [
+                    "{{videoTubeTweets}}"
+                  ],
+                  "path": [
+                    "createTweet"
+                  ]
+                },
+                "description": "\n### Create Tweet\n\nThis endpoint allows the user to create a new tweet on the video tube platform.\n\n**Request Body**\n- content (string, required): The content of the tweet.\n\n**Response**\n- statusCode (integer): The status code of the response.\n- data (object): An object containing the details of the newly created tweet, including owner, content, _id, createdAt, updatedAt, and __v.\n- message (string): A message related to the response.\n- success (boolean): Indicates if the request was successful.\n\nExample:\n```json\n{\n    \"statusCode\": 0,\n    \"data\": {\n        \"owner\": \"\",\n        \"content\": \"\",\n        \"_id\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"__v\": 0\n    },\n    \"message\": \"\",\n    \"success\": true\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-bce2d41c-965d-4f72-9c27-8748f2f0293e"
+            },
+            {
+              "name": "get User Tweets",
+              "id": "fb838d6f-4f90-4f06-b8f4-d119d235fcde",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeTweets}}/user/:userId",
+                  "host": [
+                    "{{videoTubeTweets}}"
+                  ],
+                  "path": [
+                    "user",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "userId",
+                      "value": "660ec4ef11ad1e8c3a00d46d"
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-fb838d6f-4f90-4f06-b8f4-d119d235fcde"
+            },
+            {
+              "name": "update Tweet",
+              "id": "b0bac57d-0043-487b-8e15-f866e94c029e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"updatedContent\":\"test test test\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{videoTubeTweets}}/:tweetId",
+                  "host": [
+                    "{{videoTubeTweets}}"
+                  ],
+                  "path": [
+                    ":tweetId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "tweetId",
+                      "value": "662be74027a71283e4671dba"
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-b0bac57d-0043-487b-8e15-f866e94c029e"
+            },
+            {
+              "name": "Delete a tweet",
+              "id": "54efb85c-3850-4ad4-a44f-14320d739e5a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeTweets}}/:tweetId",
+                  "host": [
+                    "{{videoTubeTweets}}"
+                  ],
+                  "path": [
+                    ":tweetId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "tweetId",
+                      "value": "662be74027a71283e4671dba"
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-54efb85c-3850-4ad4-a44f-14320d739e5a"
+            }
+          ],
+          "id": "a43517bd-3430-438e-be04-096db1156f77",
+          "uid": "30809122-a43517bd-3430-438e-be04-096db1156f77"
+        },
+        {
+          "name": "like",
+          "item": [
+            {
+              "name": "toggle tweet Like",
+              "id": "024b3952-b9ad-4e3d-94bd-cefa48990613",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeLikes}}/toggle/t/:tweetId",
+                  "host": [
+                    "{{videoTubeLikes}}"
+                  ],
+                  "path": [
+                    "toggle",
+                    "t",
+                    ":tweetId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "tweetId",
+                      "value": "662be74927a71283e4671dbd"
+                    }
+                  ]
+                },
+                "description": "The `POST` request to `{{videoTubeLikes}}/toggle/t/:tweetId` endpoint is used to toggle the like status of a tweet. Upon successful execution, the API returns a JSON response with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"statusCode\": {\n      \"type\": \"number\"\n    },\n    \"data\": {\n      \"type\": \"object\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"success\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n\n ```\n\nThe `statusCode` field represents the status code of the response, `data` contains the relevant data, `message` provides additional information, and `success` indicates the success status of the request."
+              },
+              "response": [],
+              "uid": "30809122-024b3952-b9ad-4e3d-94bd-cefa48990613"
+            },
+            {
+              "name": "toggle video like",
+              "id": "c81482eb-2b82-4416-ab42-e5066d486440",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeLikes}}/toggle/v/:videoId",
+                  "host": [
+                    "{{videoTubeLikes}}"
+                  ],
+                  "path": [
+                    "toggle",
+                    "v",
+                    ":videoId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "videoId",
+                      "value": "662bfb3727c029f321068398"
+                    }
+                  ]
+                },
+                "description": "\nThis endpoint is a POST request to toggle the like status for a specific video identified by the videoId in the URL. The request and response body are both in JSON format.\n\n### Request Body\n- No request body parameters are required for this endpoint.\n\n### Response\n- **statusCode** (number): Indicates the status of the response.\n- **data** (object): An empty object is returned as the data for this response.\n- **message** (string): A message related to the response, which is empty in this case.\n- **success** (boolean): Indicates whether the request was successful.\n\nExample Response:\n```json\n{\n    \"statusCode\": 0,\n    \"data\": {},\n    \"message\": \"\",\n    \"success\": true\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-c81482eb-2b82-4416-ab42-e5066d486440"
+            },
+            {
+              "name": "toggle comment like",
+              "id": "c1511ff9-325a-4d72-87cd-4f733c68b50d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeLikes}}/toggle/c/:commentId",
+                  "host": [
+                    "{{videoTubeLikes}}"
+                  ],
+                  "path": [
+                    "toggle",
+                    "c",
+                    ":commentId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "commentId",
+                      "value": "662cad84097f71f6c18d6d00"
+                    }
+                  ]
+                },
+                "description": "\nThis endpoint is a POST request to toggle the like status for a specific video identified by the videoId in the URL. The request and response body are both in JSON format.\n\n### Request Body\n- No request body parameters are required for this endpoint.\n\n### Response\n- **statusCode** (number): Indicates the status of the response.\n- **data** (object): An empty object is returned as the data for this response.\n- **message** (string): A message related to the response, which is empty in this case.\n- **success** (boolean): Indicates whether the request was successful.\n\nExample Response:\n```json\n{\n    \"statusCode\": 0,\n    \"data\": {},\n    \"message\": \"\",\n    \"success\": true\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-c1511ff9-325a-4d72-87cd-4f733c68b50d"
+            },
+            {
+              "name": "get Liked videos",
+              "id": "c0cb2f9c-270c-4dca-a2ba-c0a33801fe73",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeLikes}}/videos",
+                  "host": [
+                    "{{videoTubeLikes}}"
+                  ],
+                  "path": [
+                    "videos"
+                  ]
+                },
+                "description": "### Get Liked Videos\n\nThis endpoint is used to retrieve a list of liked videos.\n\n#### Request\n\n- Method: GET\n- URL: `{{videoTubeLikes}}/videos`\n    \n\n#### Response\n\nUpon a successful request, the server will respond with a status code of 200 and a JSON object in the following format:\n\n``` json\n{\n    \"statusCode\": 0,\n    \"data\": {\n        \"likedVideos\": [\n            {\n                \"_id\": \"\",\n                \"videoFile\": \"\",\n                \"thumbnail\": \"\",\n                \"owner\": \"\",\n                \"title\": \"\",\n                \"description\": \"\",\n                \"duration\": 0,\n                \"views\": 0,\n                \"isPublished\": true,\n                \"createdAt\": \"\",\n                \"updatedAt\": \"\",\n                \"__v\": 0\n            }\n        ]\n    },\n    \"message\": \"\",\n    \"success\": true\n}\n\n ```\n\nThe `likedVideos` array contains objects representing the liked videos, with details such as video ID, file, thumbnail, owner, title, description, duration, views, publication status, creation and update timestamps, and version."
+              },
+              "response": [],
+              "uid": "30809122-c0cb2f9c-270c-4dca-a2ba-c0a33801fe73"
+            }
+          ],
+          "id": "d3f94f79-4752-4f3a-891d-7907bd125a03",
+          "uid": "30809122-d3f94f79-4752-4f3a-891d-7907bd125a03"
+        },
+        {
+          "name": "videos",
+          "item": [
+            {
+              "name": "Publish a video",
+              "id": "af77fdf5-d26b-4270-8781-ac3ef100ba35",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "title",
+                      "value": "Test video",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description",
+                      "value": "test description",
+                      "type": "text"
+                    },
+                    {
+                      "key": "videoFile",
+                      "type": "file",
+                      "src": "/C:/Users/manan/Videos/Captures/project_PPT_format (1) [Protected View] - PowerPoint 2024-02-07 19-04-16.mp4"
+                    },
+                    {
+                      "key": "thumbnail",
+                      "type": "file",
+                      "fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+                      "filesNotInWorkingDirectory": [
+                        "/C:/Users/manan/Downloads/1517457193606.jpeg"
+                      ],
+                      "src": "/C:/Users/manan/Downloads/1517457193606.jpeg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{videoTubeVideos}}/",
+                  "host": [
+                    "{{videoTubeVideos}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-af77fdf5-d26b-4270-8781-ac3ef100ba35"
+            },
+            {
+              "name": "toggle video publish status",
+              "id": "11f0315b-e7bc-4232-b4c1-06d452b954db",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeVideos}}/toggle/publish/:videoId",
+                  "host": [
+                    "{{videoTubeVideos}}"
+                  ],
+                  "path": [
+                    "toggle",
+                    "publish",
+                    ":videoId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "videoId",
+                      "value": "662bf43fb035d4a3df744b0d"
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-11f0315b-e7bc-4232-b4c1-06d452b954db"
+            },
+            {
+              "name": "get Video by Id",
+              "id": "cd575581-6dcd-40e8-b8a3-8a0d7a833e49",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeVideos}}/:videoId",
+                  "host": [
+                    "{{videoTubeVideos}}"
+                  ],
+                  "path": [
+                    ":videoId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "videoId",
+                      "value": "662bf43fb035d4a3df744b0d"
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-cd575581-6dcd-40e8-b8a3-8a0d7a833e49"
+            },
+            {
+              "name": "update video",
+              "id": "bd3c619f-b6e1-48b1-8e74-0f6128d511f2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "title",
+                      "value": "test Updated ",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "description",
+                      "value": "updated test description",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "thumbnail",
+                      "type": "file",
+                      "fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+                      "filesNotInWorkingDirectory": [
+                        "/C:/Users/manan/Downloads/WhatsApp_Image_2024-03-09_at_23.51.40_67bc8232_zktycc-removebg-preview.png"
+                      ],
+                      "src": "/C:/Users/manan/Downloads/WhatsApp_Image_2024-03-09_at_23.51.40_67bc8232_zktycc-removebg-preview.png",
+                      "disabled": true
+                    },
+                    {
+                      "key": "videoFile",
+                      "type": "file",
+                      "src": "/C:/Users/manan/Videos/Captures/project_PPT_format (1) [Protected View] - PowerPoint 2024-02-07 19-04-16.mp4"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{videoTubeVideos}}/:videoId",
+                  "host": [
+                    "{{videoTubeVideos}}"
+                  ],
+                  "path": [
+                    ":videoId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "videoId",
+                      "value": "662bf43fb035d4a3df744b0d"
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-bd3c619f-b6e1-48b1-8e74-0f6128d511f2"
+            },
+            {
+              "name": "delete a video",
+              "id": "1e1056f1-c49d-4d48-a9fa-6b04d1e6f1f1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeVideos}}/:videoId",
+                  "host": [
+                    "{{videoTubeVideos}}"
+                  ],
+                  "path": [
+                    ":videoId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "videoId",
+                      "value": "662bf43fb035d4a3df744b0d"
+                    }
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-1e1056f1-c49d-4d48-a9fa-6b04d1e6f1f1"
+            },
+            {
+              "name": "get All Videos",
+              "id": "6f88b30b-c1f6-4e73-9e36-2a5eff86b5cc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeVideos}}/",
+                  "host": [
+                    "{{videoTubeVideos}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-6f88b30b-c1f6-4e73-9e36-2a5eff86b5cc"
+            }
+          ],
+          "id": "09df2c60-6140-47a7-93b8-bd92d2ffd1a1",
+          "uid": "30809122-09df2c60-6140-47a7-93b8-bd92d2ffd1a1"
+        },
+        {
+          "name": "health check",
+          "item": [
+            {
+              "name": "health check status",
+              "id": "419d91e3-d812-4f67-a3b2-098894ec34e3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8000/api/v1/healthcheck",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "v1",
+                    "healthcheck"
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "30809122-419d91e3-d812-4f67-a3b2-098894ec34e3"
+            }
+          ],
+          "id": "e43de1ca-91f7-40ff-b56b-6466ec2cecb1",
+          "uid": "30809122-e43de1ca-91f7-40ff-b56b-6466ec2cecb1"
+        },
+        {
+          "name": "comments",
+          "item": [
+            {
+              "name": "Add comment on video",
+              "id": "691b85f6-1f1a-4bc9-917f-7304d968e384",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"content\":\"Test comment\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{videoTubeComments}}/:videoId",
+                  "host": [
+                    "{{videoTubeComments}}"
+                  ],
+                  "path": [
+                    ":videoId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "videoId",
+                      "value": "662bfb3727c029f321068398\n"
+                    }
+                  ]
+                },
+                "description": "### Request Description\n\nThis endpoint allows the user to create a comment for a specific video. The request should be sent as an HTTP POST to the specified video ID.\n\n#### Request Body\n\n- content (string, required): The content of the comment.\n    \n\n### Response\n\nThe response will be in JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"statusCode\": {\n      \"type\": \"number\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"owner\": {\n          \"type\": \"string\"\n        },\n        \"video\": {\n          \"type\": \"string\"\n        },\n        \"content\": {\n          \"type\": \"string\"\n        },\n        \"_id\": {\n          \"type\": \"string\"\n        },\n        \"createdAt\": {\n          \"type\": \"string\"\n        },\n        \"updatedAt\": {\n          \"type\": \"string\"\n        },\n        \"__v\": {\n          \"type\": \"number\"\n        }\n      }\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"success\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-691b85f6-1f1a-4bc9-917f-7304d968e384"
+            },
+            {
+              "name": "update comment",
+              "id": "5e68015c-ce08-4e51-8067-01f16e66cd4d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"content\":\"Updated test comment\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{videoTubeComments}}/c/:commentId",
+                  "host": [
+                    "{{videoTubeComments}}"
+                  ],
+                  "path": [
+                    "c",
+                    ":commentId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "commentId",
+                      "value": "662caa1b6b53caa3c4bc16c3"
+                    }
+                  ]
+                },
+                "description": "This HTTP PATCH request is used to update a specific comment on a video tube. The request should be made to {{videoTubeComments}}/c/:commentId, where :commentId is the identifier of the comment to be updated.\n\n### Request Body\n\nThe request should include a JSON payload in the raw request body type. The payload should contain the \"content\" field, which represents the updated content of the comment.\n\n### Response\n\nUpon successful execution, the response will have a status code of 200 and a content type of application/json. The response body will include a \"statusCode\" indicating the status of the operation, \"data\" containing the updated comment details, \"message\" for any additional information, and \"success\" indicating the success of the operation.\n\nExample Response Body:\n\n``` json\n{\n    \"statusCode\": 0,\n    \"data\": {\n        \"_id\": \"\",\n        \"owner\": \"\",\n        \"video\": \"\",\n        \"content\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"__v\": 0\n    },\n    \"message\": \"\",\n    \"success\": true\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-5e68015c-ce08-4e51-8067-01f16e66cd4d"
+            },
+            {
+              "name": "Delete a comment",
+              "id": "7cb0e2c2-4ed6-4c40-bff5-ecb19ba33fea",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"content\":\"Updated test comment\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{videoTubeComments}}/c/:commentId",
+                  "host": [
+                    "{{videoTubeComments}}"
+                  ],
+                  "path": [
+                    "c",
+                    ":commentId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "53bb1aed-da00-4e1e-bb24-0881d8984044",
+                      "key": "commentId",
+                      "value": "662caa1b6b53caa3c4bc16c3"
+                    }
+                  ]
+                },
+                "description": "\n### Response\n\n```json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"_id\": {\n                    \"type\": \"string\"\n                },\n                \"owner\": {\n                    \"type\": \"string\"\n                },\n                \"video\": {\n                    \"type\": \"string\"\n                },\n                \"content\": {\n                    \"type\": \"string\"\n                },\n                \"createdAt\": {\n                    \"type\": \"string\"\n                },\n                \"updatedAt\": {\n                    \"type\": \"string\"\n                },\n                \"__v\": {\n                    \"type\": \"number\"\n                }\n            }\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"success\": {\n            \"type\": \"boolean\"\n        }\n    }\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-7cb0e2c2-4ed6-4c40-bff5-ecb19ba33fea"
+            },
+            {
+              "name": "Get all video comments",
+              "id": "9ea75c9a-ac87-4f66-b921-cb05b7f29a91",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeComments}}/:videoId?page=2&limit=5",
+                  "host": [
+                    "{{videoTubeComments}}"
+                  ],
+                  "path": [
+                    ":videoId"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "2",
+                      "type": "text"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5",
+                      "type": "text"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "videoId",
+                      "value": "662caa0e6b53caa3c4bc16c0"
+                    }
+                  ]
+                },
+                "description": "``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"docs\": {\n                    \"type\": \"array\",\n                    \"items\": {\n                        \"type\": \"object\",\n                        \"properties\": {\n                            \"_id\": {\n                                \"type\": \"string\"\n                            },\n                            \"owner\": {\n                                \"type\": \"string\"\n                            },\n                            \"video\": {\n                                \"type\": \"string\"\n                            },\n                            \"content\": {\n                                \"type\": \"string\"\n                            },\n                            \"createdAt\": {\n                                \"type\": \"string\"\n                            },\n                            \"updatedAt\": {\n                                \"type\": \"string\"\n                            },\n                            \"__v\": {\n                                \"type\": \"number\"\n                            }\n                        }\n                    }\n                },\n                \"totalDocs\": {\n                    \"type\": \"number\"\n                },\n                \"limit\": {\n                    \"type\": \"number\"\n                },\n                \"page\": {\n                    \"type\": \"number\"\n                },\n                \"totalPages\": {\n                    \"type\": \"number\"\n                },\n                \"pagingCounter\": {\n                    \"type\": \"number\"\n                },\n                \"hasPrevPage\": {\n                    \"type\": \"boolean\"\n                },\n                \"hasNextPage\": {\n                    \"type\": \"boolean\"\n                },\n                \"prevPage\": {\n                    \"type\": \"number\"\n                },\n                \"nextPage\": {\n                    \"type\": \"number\"\n                }\n            }\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"success\": {\n            \"type\": \"boolean\"\n        }\n    }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-9ea75c9a-ac87-4f66-b921-cb05b7f29a91"
+            }
+          ],
+          "id": "ebec19bb-4f0d-40ee-ab6b-a822f0cc93ba",
+          "uid": "30809122-ebec19bb-4f0d-40ee-ab6b-a822f0cc93ba"
+        },
+        {
+          "name": "playlist",
+          "item": [
+            {
+              "name": "create playlist",
+              "id": "24ebc3b6-0451-4f50-9a5d-75701a8a98ac",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"my playlist 2\",\r\n    \"description\":\"Test description  \"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{videoTubePlaylist}}/",
+                  "host": [
+                    "{{videoTubePlaylist}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                },
+                "description": "The endpoint allows the creation of a new playlist on the video tube platform.\n\n### Request Body\n\n- name (string, optional): The name of the playlist.\n- description (string, optional): The description of the playlist.\n    \n\n### Response\n\nThe response is in JSON format and follows the schema below:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"owner\": {\n                    \"type\": \"string\"\n                },\n                \"videos\": {\n                    \"type\": \"array\"\n                },\n                \"name\": {\n                    \"type\": \"string\"\n                },\n                \"description\": {\n                    \"type\": \"string\"\n                },\n                \"_id\": {\n                    \"type\": \"string\"\n                },\n                \"createdAt\": {\n                    \"type\": \"string\"\n                },\n                \"updatedAt\": {\n                    \"type\": \"string\"\n                },\n                \"__v\": {\n                    \"type\": \"number\"\n                }\n            }\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"success\": {\n            \"type\": \"boolean\"\n        }\n    }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-24ebc3b6-0451-4f50-9a5d-75701a8a98ac"
+            },
+            {
+              "name": "add video to playlist",
+              "id": "c728648c-c3ce-4b6d-8c1d-53c11a87efc9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubePlaylist}}/add/:videoId/:playlistId",
+                  "host": [
+                    "{{videoTubePlaylist}}"
+                  ],
+                  "path": [
+                    "add",
+                    ":videoId",
+                    ":playlistId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "videoId",
+                      "value": "662caa0e6b53caa3c4bc16c0"
+                    },
+                    {
+                      "key": "playlistId",
+                      "value": "662cb3a698850ff918752ecf"
+                    }
+                  ]
+                },
+                "description": "### Add Video to Playlist\n\nThis endpoint is used to add a video to a specific playlist.\n\n#### Request\n\n- Method: PATCH\n- URL: `{{videoTubePlaylist}}/add/:videoId/:playlistId`\n    \n\n#### Request Body\n\nThis request does not require a request body.\n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n  \"statusCode\": number,\n  \"data\": {\n    \"_id\": string,\n    \"owner\": string,\n    \"videos\": array,\n    \"name\": string,\n    \"description\": string,\n    \"createdAt\": string,\n    \"updatedAt\": string,\n    \"__v\": number\n  },\n  \"message\": string,\n  \"success\": boolean\n}\n\n ```\n\n- `statusCode`: A number indicating the status of the operation.\n- `data`: An object containing the details of the playlist after the video is added.\n    - `_id`: The ID of the playlist.\n    - `owner`: The owner of the playlist.\n    - `videos`: An array of video IDs in the playlist.\n    - `name`: The name of the playlist.\n    - `description`: The description of the playlist.\n    - `createdAt`: The date and time of creation.\n    - `updatedAt`: The date and time of the last update.\n    - `__v`: A version number.\n- `message`: A message related to the operation.\n- `success`: A boolean indicating the success of the operation.\n    \n\n#### Example\n\n``` json\n{\n  \"statusCode\": 0,\n  \"data\": {\n    \"_id\": \"\",\n    \"owner\": \"\",\n    \"videos\": [\"\"],\n    \"name\": \"\",\n    \"description\": \"\",\n    \"createdAt\": \"\",\n    \"updatedAt\": \"\",\n    \"__v\": 0\n  },\n  \"message\": \"\",\n  \"success\": true\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-c728648c-c3ce-4b6d-8c1d-53c11a87efc9"
+            },
+            {
+              "name": "get User Playlist",
+              "id": "e3d79c9a-72ba-4015-b236-b22c7aed2c06",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubePlaylist}}/user/:userId",
+                  "host": [
+                    "{{videoTubePlaylist}}"
+                  ],
+                  "path": [
+                    "user",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "userId",
+                      "value": "660ec4ef11ad1e8c3a00d46d"
+                    }
+                  ]
+                },
+                "description": "### Get User Playlist\n\nThis endpoint retrieves the playlist of a specific user.\n\n#### Request\n\n- Method: GET\n- URL: `{{videoTubePlaylist}}/user/:userId`\n    \n\n#### Response\n\n- Status: 200\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n    {\n      \"statusCode\": 0,\n      \"data\": [\n        {\n          \"_id\": \"\",\n          \"owner\": {\n            \"_id\": \"\",\n            \"username\": \"\",\n            \"fullName\": \"\",\n            \"avatar\": \"\"\n          },\n          \"videos\": [\n            {\n              \"_id\": \"\",\n              \"videoFile\": \"\",\n              \"thumbnail\": \"\",\n              \"owner\": \"\",\n              \"title\": \"\",\n              \"description\": \"\",\n              \"duration\": 0,\n              \"views\": 0,\n              \"isPublished\": true,\n              \"createdAt\": \"\",\n              \"updatedAt\": \"\",\n              \"__v\": 0\n            }\n          ],\n          \"name\": \"\",\n          \"description\": \"\",\n          \"createdAt\": \"\",\n          \"updatedAt\": \"\",\n          \"__v\": 0\n        }\n      ],\n      \"message\": \"\",\n      \"success\": true\n    }\n    \n     ```"
+              },
+              "response": [],
+              "uid": "30809122-e3d79c9a-72ba-4015-b236-b22c7aed2c06"
+            },
+            {
+              "name": "remove video from playlist",
+              "id": "b4bca08b-f402-4aa0-af9b-5558c802be17",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubePlaylist}}/remove/:videoId/:playlistId",
+                  "host": [
+                    "{{videoTubePlaylist}}"
+                  ],
+                  "path": [
+                    "remove",
+                    ":videoId",
+                    ":playlistId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "videoId",
+                      "value": "662caa0e6b53caa3c4bc16c0"
+                    },
+                    {
+                      "key": "playlistId",
+                      "value": "662cb3a698850ff918752ecf"
+                    }
+                  ]
+                },
+                "description": "This endpoint sends an HTTP PATCH request to remove a specific video from a playlist. The request should be made to {{videoTubePlaylist}}/remove/:videoId/:playlistId, where :videoId is the ID of the video to be removed and :playlistId is the ID of the playlist from which the video should be removed.\n\n### Request Body\n\nThis request does not require a request body.\n\n### Response Body\n\nThe response will be in JSON format with a 200 status code. It will contain the following fields:\n\n- statusCode (number): Indicates the status of the operation.\n- data (object): Contains information about the updated playlist after the video removal, including the playlist ID, owner, list of videos, name, description, creation and update timestamps, and version.\n- message (string): Any additional message related to the operation.\n- success (boolean): Indicates whether the operation was successful."
+              },
+              "response": [],
+              "uid": "30809122-b4bca08b-f402-4aa0-af9b-5558c802be17"
+            },
+            {
+              "name": "get playlist by id",
+              "id": "5eb790a6-a753-4a5a-bbe6-8952ab329d61",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubePlaylist}}/:playlistId",
+                  "host": [
+                    "{{videoTubePlaylist}}"
+                  ],
+                  "path": [
+                    ":playlistId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "playlistId",
+                      "value": "662cb3a698850ff918752ecf"
+                    }
+                  ]
+                },
+                "description": "The endpoint makes an HTTP GET request to retrieve details of a specific playlist identified by :playlistId. The response is in JSON format and has the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"_id\": {\n                    \"type\": \"string\"\n                },\n                \"owner\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"_id\": {\n                            \"type\": \"string\"\n                        },\n                        \"username\": {\n                            \"type\": \"string\"\n                        },\n                        \"fullName\": {\n                            \"type\": \"string\"\n                        },\n                        \"avatar\": {\n                            \"type\": \"string\"\n                        }\n                    }\n                },\n                \"videos\": {\n                    \"type\": \"array\",\n                    \"items\": {\n                        \"type\": \"object\",\n                        \"properties\": {\n                            \"_id\": {\n                                \"type\": \"string\"\n                            },\n                            \"videoFile\": {\n                                \"type\": \"string\"\n                            },\n                            \"thumbnail\": {\n                                \"type\": \"string\"\n                            },\n                            \"owner\": {\n                                \"type\": \"string\"\n                            },\n                            \"title\": {\n                                \"type\": \"string\"\n                            },\n                            \"description\": {\n                                \"type\": \"string\"\n                            },\n                            \"duration\": {\n                                \"type\": \"number\"\n                            },\n                            \"views\": {\n                                \"type\": \"number\"\n                            },\n                            \"isPublished\": {\n                                \"type\": \"boolean\"\n                            },\n                            \"createdAt\": {\n                                \"type\": \"string\"\n                            },\n                            \"updatedAt\": {\n                                \"type\": \"string\"\n                            },\n                            \"__v\": {\n                                \"type\": \"number\"\n                            }\n                        }\n                    }\n                },\n                \"name\": {\n                    \"type\": \"string\"\n                },\n                \"description\": {\n                    \"type\": \"string\"\n                },\n                \"createdAt\": {\n                    \"type\": \"string\"\n                },\n                \"updatedAt\": {\n                    \"type\": \"string\"\n                },\n                \"__v\": {\n                    \"type\": \"number\"\n                }\n            }\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"success\": {\n            \"type\": \"boolean\"\n        }\n    }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-5eb790a6-a753-4a5a-bbe6-8952ab329d61"
+            },
+            {
+              "name": "delete a playlist",
+              "id": "d340c725-16e3-4374-b2ab-5f180bc8f72e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubePlaylist}}/:playlistId",
+                  "host": [
+                    "{{videoTubePlaylist}}"
+                  ],
+                  "path": [
+                    ":playlistId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "playlistId",
+                      "value": "662cc64508289dc4e2230188"
+                    }
+                  ]
+                },
+                "description": "### Delete Playlist\n\nThis endpoint is used to delete a specific playlist.\n\n#### Request\n\n- Method: DELETE\n- URL: `{{videoTubePlaylist}}/:playlistId`\n    \n\n#### Response\n\nThe response will be a JSON object with the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"_id\": {\n                    \"type\": \"string\"\n                },\n                \"owner\": {\n                    \"type\": \"string\"\n                },\n                \"videos\": {\n                    \"type\": \"array\"\n                },\n                \"name\": {\n                    \"type\": \"string\"\n                },\n                \"description\": {\n                    \"type\": \"string\"\n                },\n                \"createdAt\": {\n                    \"type\": \"string\"\n                },\n                \"updatedAt\": {\n                    \"type\": \"string\"\n                },\n                \"__v\": {\n                    \"type\": \"number\"\n                }\n            }\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"success\": {\n            \"type\": \"boolean\"\n        }\n    }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-d340c725-16e3-4374-b2ab-5f180bc8f72e"
+            },
+            {
+              "name": "update Playlist",
+              "id": "fc94f16d-11b9-4a21-bcd7-4af7ee26d070",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"My playlist\",\r\n    \"description\":\"Test\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{videoTubePlaylist}}/:playlistId",
+                  "host": [
+                    "{{videoTubePlaylist}}"
+                  ],
+                  "path": [
+                    ":playlistId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "playlistId",
+                      "value": "662cb3a698850ff918752ecf"
+                    }
+                  ]
+                },
+                "description": "This HTTP PATCH request is used to update a specific playlist identified by :playlistId in the VideoTube application. The request should include a JSON payload in the raw request body type with the keys \"name\" and \"description\" to update the name and description of the playlist.\n\n### Request Body\n\n- `name` (string, optional): The updated name of the playlist.\n- `description` (string, optional): The updated description of the playlist.\n    \n\n### Response\n\nUpon a successful update, the server returns a JSON response with a status code of 200 and the following structure:\n\n``` json\n{\n    \"statusCode\": 0,\n    \"data\": {\n        \"_id\": \"\",\n        \"owner\": \"\",\n        \"videos\": [\"\"],\n        \"name\": \"\",\n        \"description\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"__v\": 0\n    },\n    \"message\": \"\",\n    \"success\": true\n}\n\n ```\n\nThe `data` object contains the updated details of the playlist including its ID, owner, videos, name, description, creation and update timestamps, and version."
+              },
+              "response": [],
+              "uid": "30809122-fc94f16d-11b9-4a21-bcd7-4af7ee26d070"
+            }
+          ],
+          "id": "4e4ee73e-2d42-48d7-a34f-2d28bf21943c",
+          "uid": "30809122-4e4ee73e-2d42-48d7-a34f-2d28bf21943c"
+        },
+        {
+          "name": "subscription",
+          "item": [
+            {
+              "name": "toggle Subscription",
+              "id": "bbde7bdc-7c54-47e7-9739-eccf451d7057",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeSubscription}}/c/:channelId",
+                  "host": [
+                    "{{videoTubeSubscription}}"
+                  ],
+                  "path": [
+                    "c",
+                    ":channelId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "channelId",
+                      "value": "660ecc703af65c72dbaabdcb"
+                    }
+                  ]
+                },
+                "description": "\nThe endpoint makes an HTTP POST request to subscribe to a specific channel identified by the channelId parameter in the URL. Upon successful execution, the response returns a status code of 200 and a JSON object with the following schema:\n\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"statusCode\": {\n      \"type\": \"number\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"subscriber\": {\n          \"type\": \"string\"\n        },\n        \"channel\": {\n          \"type\": \"string\"\n        },\n        \"_id\": {\n          \"type\": \"string\"\n        },\n        \"createdAt\": {\n          \"type\": \"string\"\n        },\n        \"updatedAt\": {\n          \"type\": \"string\"\n        },\n        \"__v\": {\n          \"type\": \"number\"\n        }\n      }\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"success\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-bbde7bdc-7c54-47e7-9739-eccf451d7057"
+            },
+            {
+              "name": "get user channel subscribers",
+              "id": "58936b1e-4336-4c99-bafd-c36dd0d2c78a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeSubscription}}/c/:channelId",
+                  "host": [
+                    "{{videoTubeSubscription}}"
+                  ],
+                  "path": [
+                    "c",
+                    ":channelId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7db4048c-6dc8-4385-a62b-23e0214958f0",
+                      "key": "channelId",
+                      "value": "660ecc703af65c72dbaabdcb"
+                    }
+                  ]
+                },
+                "description": "\nThe endpoint makes an HTTP POST request to subscribe to a specific channel identified by the channelId parameter in the URL. Upon successful execution, the response returns a status code of 200 and a JSON object with the following schema:\n\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"statusCode\": {\n      \"type\": \"number\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"subscriber\": {\n          \"type\": \"string\"\n        },\n        \"channel\": {\n          \"type\": \"string\"\n        },\n        \"_id\": {\n          \"type\": \"string\"\n        },\n        \"createdAt\": {\n          \"type\": \"string\"\n        },\n        \"updatedAt\": {\n          \"type\": \"string\"\n        },\n        \"__v\": {\n          \"type\": \"number\"\n        }\n      }\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"success\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n```\n"
+              },
+              "response": [],
+              "uid": "30809122-58936b1e-4336-4c99-bafd-c36dd0d2c78a"
+            },
+            {
+              "name": "get subscribed channel",
+              "id": "b7c2c0c5-1dca-4dda-b1c0-662a308ee7e2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeSubscription}}/u/:subscriberId",
+                  "host": [
+                    "{{videoTubeSubscription}}"
+                  ],
+                  "path": [
+                    "u",
+                    ":subscriberId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "subscriberId",
+                      "value": "660ec4ef11ad1e8c3a00d46d"
+                    }
+                  ]
+                },
+                "description": "\n### GET {{videoTubeSubscription}}/u/:subscriberId\n\nThis endpoint retrieves subscription details for a specific subscriber.\n\n#### Request\nNo request body parameters are required for this endpoint.\n\n- `:subscriberId` (path parameter) - The unique identifier of the subscriber.\n\n#### Response\nThe response will be in JSON format with the following schema:\n\n```json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": {\n            \"type\": \"number\"\n        },\n        \"data\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"_id\": {\n                        \"type\": \"string\"\n                    },\n                    \"subscriber\": {\n                        \"type\": \"string\"\n                    },\n                    \"channel\": {\n                        \"type\": \"object\",\n                        \"properties\": {\n                            \"_id\": {\n                                \"type\": \"string\"\n                            },\n                            \"username\": {\n                                \"type\": \"string\"\n                            },\n                            \"email\": {\n                                \"type\": \"string\"\n                            },\n                            \"fullName\": {\n                                \"type\": \"string\"\n                            },\n                            \"avatar\": {\n                                \"type\": \"string\"\n                            }\n                        }\n                    },\n                    \"createdAt\": {\n                        \"type\": \"string\"\n                    },\n                    \"updatedAt\": {\n                        \"type\": \"string\"\n                    },\n                    \"__v\": {\n                        \"type\": \"number\"\n                    }\n                }\n            }\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"success\": {\n            \"type\": \"boolean\"\n        }\n    }\n}\n```\nThe response will have a status code of 200 and the content type will be `application/json`.\n\n"
+              },
+              "response": [],
+              "uid": "30809122-b7c2c0c5-1dca-4dda-b1c0-662a308ee7e2"
+            }
+          ],
+          "id": "d63458be-2bf6-47b1-98cf-6a35056579f1",
+          "uid": "30809122-d63458be-2bf6-47b1-98cf-6a35056579f1"
+        },
+        {
+          "name": "dashboard",
+          "item": [
+            {
+              "name": "get channel videos",
+              "id": "3efadc26-8a1d-428d-83e4-6fdc721e11c2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeDashboard}}/videos",
+                  "host": [
+                    "{{videoTubeDashboard}}"
+                  ],
+                  "path": [
+                    "videos"
+                  ]
+                },
+                "description": "The endpoint makes an HTTP GET request to retrieve a list of videos from the video tube dashboard. The response is a JSON object with a status code of 200 and a content type of application/json. The response body follows the schema below:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"statusCode\": {\n      \"type\": \"number\"\n    },\n    \"data\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"_id\": {\n            \"type\": \"string\"\n          },\n          \"videoFile\": {\n            \"type\": \"string\"\n          },\n          \"thumbnail\": {\n            \"type\": \"string\"\n          },\n          \"owner\": {\n            \"type\": \"string\"\n          },\n          \"title\": {\n            \"type\": \"string\"\n          },\n          \"description\": {\n            \"type\": \"string\"\n          },\n          \"duration\": {\n            \"type\": \"number\"\n          },\n          \"views\": {\n            \"type\": \"number\"\n          },\n          \"isPublished\": {\n            \"type\": \"boolean\"\n          },\n          \"createdAt\": {\n            \"type\": \"string\"\n          },\n          \"updatedAt\": {\n            \"type\": \"string\"\n          },\n          \"__v\": {\n            \"type\": \"number\"\n          }\n        }\n      }\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"success\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-3efadc26-8a1d-428d-83e4-6fdc721e11c2"
+            },
+            {
+              "name": "get channel stats",
+              "id": "12ee5c2e-d174-49a8-abc6-536eacebc150",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{videoTubeDashboard}}/stats",
+                  "host": [
+                    "{{videoTubeDashboard}}"
+                  ],
+                  "path": [
+                    "stats"
+                  ]
+                },
+                "description": "The endpoint makes an HTTP GET request to retrieve a list of videos from the video tube dashboard. The response is a JSON object with a status code of 200 and a content type of application/json. The response body follows the schema below:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"statusCode\": {\n      \"type\": \"number\"\n    },\n    \"data\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"_id\": {\n            \"type\": \"string\"\n          },\n          \"videoFile\": {\n            \"type\": \"string\"\n          },\n          \"thumbnail\": {\n            \"type\": \"string\"\n          },\n          \"owner\": {\n            \"type\": \"string\"\n          },\n          \"title\": {\n            \"type\": \"string\"\n          },\n          \"description\": {\n            \"type\": \"string\"\n          },\n          \"duration\": {\n            \"type\": \"number\"\n          },\n          \"views\": {\n            \"type\": \"number\"\n          },\n          \"isPublished\": {\n            \"type\": \"boolean\"\n          },\n          \"createdAt\": {\n            \"type\": \"string\"\n          },\n          \"updatedAt\": {\n            \"type\": \"string\"\n          },\n          \"__v\": {\n            \"type\": \"number\"\n          }\n        }\n      }\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"success\": {\n      \"type\": \"boolean\"\n    }\n  }\n}\n\n ```"
+              },
+              "response": [],
+              "uid": "30809122-12ee5c2e-d174-49a8-abc6-536eacebc150"
+            }
+          ],
+          "id": "e8e951ec-203d-427e-b9cc-2df9df589f2c",
+          "uid": "30809122-e8e951ec-203d-427e-b9cc-2df9df589f2c"
+        }
+      ],
+      "variable": [
+        {
+          "key": "videoTubeAuth",
+          "value": "http://localhost:8000/api/v1/auth"
+        },
+        {
+          "key": "videoTubeTweets",
+          "value": "http://localhost:8000/api/v1/tweets"
+        },
+        {
+          "key": "videoTubeLikes",
+          "value": "http://localhost:8000/api/v1/likes"
+        },
+        {
+          "key": "videoTubeVideos",
+          "value": "http://localhost:8000/api/v1/videos"
+        },
+        {
+          "key": "videoTubeComments",
+          "value": "http://localhost:8000/api/v1/comments"
+        },
+        {
+          "key": "videoTubePlaylist",
+          "value": "http://localhost:8000/api/v1/playlist"
+        },
+        {
+          "key": "videoTubeSubscription",
+          "value": "http://localhost:8000/api/v1/subscriptions"
+        },
+        {
+          "key": "videoTubeDashboard",
+          "value": "http://localhost:8000/api/v1/dashboard"
+        }
+      ]
+    }
+  }

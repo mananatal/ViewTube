@@ -303,7 +303,7 @@ const updateUserCoverImage=asyncHandler(async (req,res)=>{
         req.user._id,
         {
             $set:{
-                coverImage:uploadedCoverImage.secure_url,
+                coverImage:uploadedCoverImage?.secure_url,
             }
         },
         {new:true}
