@@ -1,4 +1,4 @@
-# Project Name: Videotube 
+# Project Name: ViewTube 
 
 
 ## Project Summary:
@@ -19,11 +19,11 @@ I've dedicated over a month to develop and refine this project.
 You can view the design model for this project [here](https://app.eraser.io/workspace/IjuDeHAW1WwnKRJ6Oc0R?origin=share).
 
 ## Postman File:
-Included in this repository is a Postman collection file (`videoTube.postmanCollection.json`) for testing and interacting with the backend API.
+Included in this repository is a Postman collection file (`ViewTube.postmanCollection.json`) for testing and interacting with the backend API.
 
 
 ## Installation:
-1. Clone the repository: `git clone https://github.com/mananatal/videoTube.git`
+1. Clone the repository: `git clone https://github.com/mananatal/ViewTube.git`
 2. Install dependencies: `npm install`
 3. Start the server: `npm start`
 
@@ -68,5 +68,5 @@ Contributions are welcome! Feel free to open issues or submit pull requests to h
 ## Feedback and Contact:
 I welcome any feedback or suggestions for improving this project. If you have questions, ideas, or just want to connect, feel free to reach out to me via email at [mananatal25@gmail.com](mailto:mananatal25@gmail.com) or through my [GitHub profile](https://github.com/mananatal).
 
-Thank you for your interest in Videotube!
+Thank you for your interest in ViewTube!
 
