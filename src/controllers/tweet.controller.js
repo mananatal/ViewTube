@@ -63,7 +63,7 @@ const updateTweet = asyncHandler(async (req, res) => {
         {new:true}
     );
 
-    return res.status(200).json(new ApiResponse(200,updateTweet,"Tweet Updated Successfully"));
+    return res.status(200).json(new ApiResponse(200,updatedTweet,"Tweet Updated Successfully"));
 })
 
 const deleteTweet = asyncHandler(async (req, res) => {

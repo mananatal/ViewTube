@@ -115,7 +115,7 @@ const loginUser=asyncHandler(async (req,res)=>{
 
     //removing existedUser password and refresh token
     existedUser.password=undefined;
-    existedUser.accessToken=undefined;
+    existedUser.refreshToken=undefined;
 
     //now sending successful response and setting cookies
     return res.status(200)
@@ -245,7 +245,7 @@ const updataAccountDetails=asyncHandler(async (req,res)=>{
             }
         },
         {new:true}
-    );
+    ).select("-refreshToken -password");
 
     return res.status(200).json(
         new ApiResponse(200,{user:updatedUser},"User data updated successfully")

@@ -94,9 +94,6 @@ const addVideoToPlaylist = asyncHandler(async (req, res) => {
     }
 
 
-
-    // const existedVideoInPlaylist=await 
-
     const updatedPlaylist=await Playlist.findOneAndUpdate(
         {_id:playlistId},
         {
