@@ -48,7 +48,7 @@ const registerUser=asyncHandler(async (req,res)=>{
     if([password,fullName,email,username,avatarLocalPath].some((field)=>field.trim==="")){
         throw new ApiError(400,"All fields are required");
     }
-                                                                                                                                                
+                                                                                                                                            
     //checking if user already registers
     const existedUser=await User.findOne({$or:[{email},{username}]});
 
@@ -160,7 +160,7 @@ const refreshAccessToken=asyncHandler(async (req,res)=>{
     const incomingRefreshToken=req.cookies.refreshToken || req.body.refreshToken;
 
     if(!incomingRefreshToken){
-        throw new ApiError(401,"Unauthorized request");
+        throw new ApiError("Unauthorized Request");
     }
 
     //if refresh token exist then decode it
@@ -275,7 +275,7 @@ const updateUserAvatar=asyncHandler(async (req,res)=>{
             }
         },
         {new:true}
-    );
+    ).select("-refreshToken -password");
     
     return res
     .status(200)
@@ -307,7 +307,7 @@ const updateUserCoverImage=asyncHandler(async (req,res)=>{
             }
         },
         {new:true}
-    );
+    ).select("-refreshToken -password");
     
     return res
     .status(200)
