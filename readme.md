@@ -52,9 +52,9 @@ ACCESS_TOKEN_EXPIRE_TIME=1d
 ACCESS_TOKEN_SECRET=bfdvsdvmsdkvojpsdjvsdpojvosdvopbjsdpojvposdjca500b40cadf1605292a736f7374f0c38dfa@45vsdv
 REFRESH_TOKEN_EXPIRE_TIME=10d
 REFRESH_TOKEN_SECRET=bfdvsdvmsdkvojpsdjvsdpojvosdvopbjsdpojvposdjca500b40cadf1605292a736f7374f0c38dfa@45vsdv
-CLOUD_NAME=desdvvdsn
-API_KEY=7344565656262125
-API_SECRET=cWALhsdvsdvsdvsdv56_A1vRj6pymO8
+CLOUD_NAME=dehrthrsn
+API_KEY=765645654654125
+API_SECRET=chfghfghtrhgfhdrhrthfghweO8
 ```
 
 ## Usage:
